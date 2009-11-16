@@ -1,4 +1,4 @@
-package complex
+package numbers
 
 const Hello = "Hello complex!"
 

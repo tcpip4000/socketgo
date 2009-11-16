@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt";
-	"complex";
+	"numbers";
 )
 
 func main() {
@@ -18,12 +18,11 @@ func main() {
 	msg = msg + msg1;
 	fmt.Println(msg, total, option);
 	fmt.Printf("%s: %f: %t\n", msg, total, option);
-	fmt.Println(complex.Hello);
-	var i complex.MyComplex;
+	fmt.Println(numbers.Hello);
+	var i numbers.MyComplex;
 	i.SetReal(23);
 	fmt.Println(i.GetReal());
-	//fmt.Println(complex.Msg);
-
+	fmt.Println(numbers.Msg1);
 
 }
 
