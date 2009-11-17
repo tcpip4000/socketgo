@@ -3,9 +3,29 @@ package main
 import (
 	"fmt";
 	"numbers";
+	"net";
+	"os";
 )
 
 func main() {
+	var host = "127.0.0.1";
+	var port = "9998";
+	var remote = host + ":" + port;
+	var msg []uint8;	
+
+	con, error := net.Dial("tcp", "", remote);
+	defer con.Close();
+	if error != nil { fmt.Printf("Host not found: %s\n", error ); os.Exit(1); }
+
+	in, error := con.Write(msg);
+	if error != nil { fmt.Printf("Error sending data: %s\n", error ); os.Exit(2); }
+
+	fmt.Println(in);
+	fmt.Println(numbers.Hello);
+	fmt.Println("Connection OK");
+
+
+/*
 	var real,imaginary float;
 	var msg = "The ";
 	var msg1 = "result is: ";
@@ -43,6 +63,7 @@ func main() {
 	i.SetReal(12);
 	fmt.Println(i.GetReal(), j.GetReal());
 	fmt.Println(numbers.Msg1);
+*/
 
 }
 
