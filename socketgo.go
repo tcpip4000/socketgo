@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt";
-	"numbers";
 	"net";
 	"os";
 	"strings";
@@ -23,7 +22,6 @@ func main() {
 	in, error := con.Write(strings.Bytes(msg));
 	if error != nil { fmt.Printf("Error sending data: %s, in: %d\n", error, in ); os.Exit(2); }
 
-	fmt.Println(numbers.Hello);
 	fmt.Println("Connection OK");
 
 }
