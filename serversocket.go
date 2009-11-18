@@ -4,7 +4,6 @@ import (
 	"fmt";
 	"net";
 	"os";
-	"io";
 )
 
 func main() {
@@ -31,7 +30,7 @@ func main() {
 		for read {
 			n, error := con.Read(data);
 			switch error { 
-			case io.ErrUnexpectedEOF:
+			case os.EOF:
 				fmt.Printf("Warning: End of data reached: %s \n", error); 
 				read = false;
 			case nil:
@@ -42,7 +41,7 @@ func main() {
 				read = false;
 			}
 		}
-		fmt.Println("Full response: " + response); 
+		fmt.Println("Data send by client: " + response); 
 	}
 }
 

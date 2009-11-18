@@ -9,10 +9,12 @@ import (
 )
 
 func main() {
-	var host = "127.0.0.1";
-	var port = "9998";
-	var remote = host + ":" + port;
-	var msg string = "hola mundo2";
+	var (
+		host = "127.0.0.1";
+		port = "9998";
+		remote = host + ":" + port;
+		msg string = "hola mundo2 y otras cosas más";
+	)
 
 	con, error := net.Dial("tcp", "", remote);
 	defer con.Close();
