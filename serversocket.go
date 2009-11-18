@@ -4,6 +4,7 @@ import (
 	"fmt";
 	"net";
 	"os";
+	"io";
 )
 
 func main() {
@@ -13,6 +14,7 @@ func main() {
 		remote = host + ":" + port;
 		data = make([]byte, 10);
 	)
+	fmt.Println("Initiating server... (Ctrl-C to stop)");
 
 	lis, error := net.Listen("tcp", remote);
 	defer lis.Close();
@@ -22,21 +24,25 @@ func main() {
 	}
 	for {
 		var response string;
+		var read = true;
 		con, error := lis.Accept();
 		defer con.Close();
-		if error != nil { fmt.Printf("Error accepting: %s\n", error); os.Exit(2); }
-		for {
+		if error != nil { fmt.Printf("Error: Accepting data: %s\n", error); os.Exit(2); }
+		for read {
 			n, error := con.Read(data);
-			//fmt.Println(n, error);
-			if error != nil { 
-				fmt.Printf("Error reading: %s, %d \n", error, n); 
-				break;
+			switch error { 
+			case io.ErrUnexpectedEOF:
+				fmt.Printf("Warning: End of data reached: %s \n", error); 
+				read = false;
+			case nil:
+				//fmt.Println(string(data[0:n])); // Debug
+				response = response + string(data[0:n]);
+			default:
+				fmt.Printf("Error: Reading data : %s \n", error); 
+				read = false;
 			}
-			fmt.Println(string(data[0:n]));
-			response = response + string(data[0:n]);
 		}
-		fmt.Println("Full response: " + response);
+		fmt.Println("Full response: " + response); 
 	}
-	fmt.Println("Closing server...");
 }
 
