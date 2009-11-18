@@ -11,7 +11,7 @@ func main() {
 		host = "127.0.0.1";
 		port = "9998";
 		remote = host + ":" + port;
-		data = make([]byte, 10);
+		data = make([]byte, 1024);
 	)
 	fmt.Println("Initiating server... (Ctrl-C to stop)");
 
@@ -27,6 +27,7 @@ func main() {
 		con, error := lis.Accept();
 		defer con.Close();
 		if error != nil { fmt.Printf("Error: Accepting data: %s\n", error); os.Exit(2); }
+		fmt.Printf("=== New Connection received from: %s \n", con.RemoteAddr()); 
 		for read {
 			n, error := con.Read(data);
 			switch error { 
