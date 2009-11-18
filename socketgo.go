@@ -5,25 +5,28 @@ import (
 	"numbers";
 	"net";
 	"os";
+	//"strconv";
+	"strings";
 )
 
 func main() {
 	var host = "127.0.0.1";
 	var port = "9998";
 	var remote = host + ":" + port;
-	var msg []uint8;	
+	//var msg = []uint8 {64,65,66};	
+	var msg2 string= "hola mundo";
 
 	con, error := net.Dial("tcp", "", remote);
 	defer con.Close();
 	if error != nil { fmt.Printf("Host not found: %s\n", error ); os.Exit(1); }
 
-	in, error := con.Write(msg);
+	in, error := con.Write(strings.Bytes(msg2));
 	if error != nil { fmt.Printf("Error sending data: %s\n", error ); os.Exit(2); }
 
-	fmt.Println(in);
 	fmt.Println(numbers.Hello);
 	fmt.Println("Connection OK");
 
+}
 
 /*
 	var real,imaginary float;
@@ -65,5 +68,5 @@ func main() {
 	fmt.Println(numbers.Msg1);
 */
 
-}
+
 
