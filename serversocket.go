@@ -29,7 +29,6 @@ func main() {
 		var response string;
 		var read = true;
 		con, error := lis.Accept();
-		defer con.Close();
 		if error != nil { fmt.Printf("Error: Accepting data: %s\n", error); os.Exit(2); }
 		fmt.Printf("=== New Connection received from: %s \n", con.RemoteAddr()); 
 		for read {
@@ -47,6 +46,7 @@ func main() {
 			}
 		}
 		fmt.Println("Data send by client: " + response); 
+		con.Close();
 	}
 }
 
